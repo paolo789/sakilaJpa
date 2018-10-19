@@ -10,7 +10,7 @@ import it.objectmethod.sakila.sakilaJpa.entity.CategoryBean;
 
 
 @Repository
-public interface CategoryRepository  extends JpaRepository<CategoryBean, String>{
+public interface CategoryRepository  extends JpaRepository<CategoryBean, Integer>{
 
 	public List<CategoryBean> findAll();	
 }

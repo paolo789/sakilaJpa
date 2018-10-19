@@ -34,8 +34,17 @@ public class FilmBean {
 	private List<AttoriBean> attoreList;
 	
 	
+	@ManyToMany
+	@JoinTable(name = "film_category", joinColumns = @JoinColumn(name = "film_id", referencedColumnName = "film_id")
+	, inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "category_id"))
+	private List<CategoryBean> categoryList;
 	
-	
+	public List<CategoryBean> getCategoryList() {
+		return categoryList;
+	}
+	public void setCategoryList(List<CategoryBean> categoryList) {
+		this.categoryList = categoryList;
+	}
 	public List<AttoriBean> getAttoreList() {
 		return attoreList;
 	}

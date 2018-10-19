@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import it.objectmethod.sakila.sakilaJpa.entity.AttoriBean;
+import it.objectmethod.sakila.sakilaJpa.entity.CategoryBean;
 import it.objectmethod.sakila.sakilaJpa.entity.FilmBean;
 import it.objectmethod.sakila.sakilaJpa.repository.AttoriRepository;
 import it.objectmethod.sakila.sakilaJpa.repository.CategoryRepository;
@@ -23,6 +24,9 @@ public class FilmController {
 	
 	@Autowired
 	private AttoriRepository ar;
+	
+	@Autowired
+	private CategoryRepository cr;
 	
 	@RequestMapping("/cercafilm")
 	public String cercaFilm(ModelMap map,@RequestParam("film") String film) {
@@ -42,7 +46,9 @@ public class FilmController {
 	
 	@RequestMapping("/cercagenere")
 	public String setCategory(ModelMap map, @RequestParam("filmgenere") String filmGenere) {
-		List<FilmBean> categoryFilmList=fr.getFilmByCategory(filmGenere);
+		//List<FilmBean> categoryFilmList=fr.getFilmByCategory(filmGenere);
+		CategoryBean c=cr.findOne(Integer.parseInt(filmGenere));
+		List<FilmBean> categoryFilmList=c.getFilmList();
 		map.addAttribute("categoryFilm", categoryFilmList);
 		return "forward:prima";
 	}
